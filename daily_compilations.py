@@ -162,9 +162,9 @@ def main(argv):
         print (' Path READ ERROR use defaults')
     if len(path)==0:
         path=config.path
-        outpath=path
+        output_path=path
     print ('Input path is ', path)
-    print ('Output path is ', outpath)
+    print ('Output path is ', output_path)
     name_list=[]
     data_list=[]
 
@@ -203,10 +203,10 @@ def main(argv):
     others=[col for col in final_water.columns if col not in final_cols]
     final_water=pd.concat([final_water[final_cols],final_water[others]],axis=1)
     final_act=final_act.sort_values(['hole no.','date']).reset_index(drop=True)
-    print('output',outpath+'activity_compilation.xlsx')
-    final_act.to_excel(outpath+'activity_compilation.xlsx',index=False)
-    print('output',outpath+'water_compilation.xlsx')
-    final_water.to_excel(outpath+'water_compilation.xlsx',index=False)
+    print('output',output_path+'activity_compilation.xlsx')
+    final_act.to_excel(output_path+'activity_compilation.xlsx',index=False)
+    print('output',output_path+'water_compilation.xlsx')
+    final_water.to_excel(output_path+'water_compilation.xlsx',index=False)
 
 
 if __name__ == "__main__":
