@@ -144,6 +144,7 @@ def get_drill_data(data,indicators,comp_target=''):
 
 def main(argv):
     path=[]
+    output_path=[]
     try:
         opts, args = getopt.getopt(argv,"ri:o:",["input_path=","output_file="])
         for opt, arg in opts:
@@ -153,7 +154,7 @@ def main(argv):
                 
             elif opt in ("-i", "--input_path"):
                 path = arg
-                print (f'Input files path is {arg} ',)
+                print (f'Input file path is {arg} ',)
             elif opt in ("-o", "--output_path"):
                 output_path= arg
                 print ('Output file path is ', output_path)
@@ -162,6 +163,7 @@ def main(argv):
         print (' Path READ ERROR use defaults')
     if len(path)==0:
         path=config.path
+    if len(output_path)==0:
         output_path=path
     print ('Input path is ', path)
     print ('Output path is ', output_path)
