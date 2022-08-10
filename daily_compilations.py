@@ -98,13 +98,15 @@ def get_drill_data(data,indicators,comp_target=''):
         try:    clean_data.columns=[col.replace('\n','') for col in clean_data.columns]
         except Exception as e: print(e)
 
-        clean_data['drill from']=pd.to_numeric(clean_data['drill from'],errors='coerce')
-        drop=clean_data[clean_data['drill from'].isna()==True].index
-        clean_data=clean_data.drop(drop)
+        try:
+            clean_data['drill from']=pd.to_numeric(clean_data['drill from'],errors='coerce')
+            drop=clean_data[clean_data['drill from'].isna()==True].index
+            clean_data=clean_data.drop(drop)
+        except Exception as e: print(e)
         drop_col=['name','shift','size','tools']
         for col in drop_col:
             try:clean_data=clean_data.drop(col,axis=1).fillna(0)
-            except Exception as e: print(e)
+            except Exception as e: pass
         clean_data['total man hours']=pd.to_numeric(clean_data['total man hours'],errors='coerce').fillna(method='ffill').fillna(method='bfill')
         dr=data.where(data.eq('Drill')).stack().index.values[0]
         clean_data['drill']=data.iloc[dr[0],dr[1]+1]
@@ -197,6 +199,7 @@ def main(argv):
 
         water_data.append(w_data)
         act_data.append(a_data)
+    print('##### done pulling values######')
     final_water=pd.concat(water_data,axis=0)
     final_act=pd.concat(act_data,axis=0)
 
