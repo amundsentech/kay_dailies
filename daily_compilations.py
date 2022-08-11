@@ -199,7 +199,8 @@ def main(argv):
 
         water_data.append(w_data)
         act_data.append(a_data)
-    print('##### done pulling values######')
+    print('##### done pulling values ######')
+    print('##### Final Clean ######')
     final_water=pd.concat(water_data,axis=0)
     final_act=pd.concat(act_data,axis=0)
 
